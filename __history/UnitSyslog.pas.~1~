@@ -1,0 +1,32 @@
+unit UnitSyslog;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics,
+  Controls, Forms, uniGUITypes, uniGUIAbstractClasses,
+  uniGUIClasses, uniGUIForm;
+
+type
+  TfrmSysLog = class(TUniForm)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+function frmSysLog: TfrmSysLog;
+
+implementation
+
+{$R *.dfm}
+
+uses
+  MainModule, uniGUIApplication;
+
+function frmSysLog: TfrmSysLog;
+begin
+  Result := TfrmSysLog(UniMainModule.GetFormInstance(TfrmSysLog));
+end;
+
+end.

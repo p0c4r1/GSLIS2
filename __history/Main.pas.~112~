@@ -1,0 +1,374 @@
+unit Main;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics,
+  Controls, Forms, uniGUITypes, uniGUIAbstractClasses,
+  uniGUIClasses, uniGUIRegClasses, uniGUIForm, Vcl.Menus, uniMainMenu,
+  uniPageControl, uniGUIBaseClasses, uniPanel, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, uniBasicGrid, uniDBGrid;
+
+type
+  TMainForm = class(TUniForm)
+    UniMainMenu1: TUniMainMenu;
+    mnSystem: TUniMenuItem;
+    mnLogoff: TUniMenuItem;
+    mnPwd: TUniMenuItem;
+    mnFO: TUniMenuItem;
+    mnFODaftar: TUniMenuItem;
+    UniContainerPanel1: TUniContainerPanel;
+    UniPageControl1: TUniPageControl;
+    mnFOStatus: TUniMenuItem;
+    mnFOLaporanShift: TUniMenuItem;
+    N1: TUniMenuItem;
+    Rilisnote1: TUniMenuItem;
+    mnFOHomeService: TUniMenuItem;
+    mnLog: TUniMenuItem;
+    mnAdmin: TUniMenuItem;
+    mnUser: TUniMenuItem;
+    QMenu: TFDQuery;
+    DataSource1: TDataSource;
+    mnProses: TUniMenuItem;
+    mnSampling: TUniMenuItem;
+    mnLap: TUniMenuItem;
+    mnLapJual: TUniMenuItem;
+    mnIsiHasil: TUniMenuItem;
+    mnIsiHasilNolab: TUniMenuItem;
+    mnLapDokter: TUniMenuItem;
+    mnTestInduk: TUniMenuItem;
+    mnTest: TUniMenuItem;
+    mnCetakHasil: TUniMenuItem;
+    mnIsiHasilPx: TUniMenuItem;
+    procedure mnLogoffClick(Sender: TObject);
+    procedure mnFODaftarClick(Sender: TObject);
+    procedure mnFOStatusClick(Sender: TObject);
+    procedure mnFOLaporanShiftClick(Sender: TObject);
+    procedure UniFormKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure mnPwdClick(Sender: TObject);
+    procedure Rilisnote1Click(Sender: TObject);
+    procedure mnFOHomeServiceClick(Sender: TObject);
+    procedure mnLogClick(Sender: TObject);
+    procedure mnUserClick(Sender: TObject);
+    procedure UniFormAfterShow(Sender: TObject);
+    procedure mnSamplingClick(Sender: TObject);
+    procedure mnLapJualClick(Sender: TObject);
+    procedure mnIsiHasilNolabClick(Sender: TObject);
+    procedure mnLapDokterClick(Sender: TObject);
+    procedure mnTestClick(Sender: TObject);
+    procedure mnCetakHasilClick(Sender: TObject);
+    procedure mnIsiHasilPxClick(Sender: TObject);
+
+  private
+    { Private declarations }
+    // Bypass of Source.Items (it's clone of IterateMenus from Menus unit)
+    // procedure BypassMenuItem(Func: Pointer; Source: TMenuItem);
+    // Finds Item.Name = Value in the aMenuItem.Items
+    // function FindItemByName(aMenuItem: TMenuItem; Value: string): TMenuItem;
+
+  public
+    { Public declarations }
+  end;
+
+function MainForm: TMainForm;
+
+var
+  StringValue: string;
+  IntegerValue: Integer;
+  FoundItem: TUniMenuItem;
+
+implementation
+
+{$R *.dfm}
+
+uses
+  uniGUIVars, MainModule, uniGUIApplication, UnitFODaftar,
+  UnitFOStatus, UnitLaporanHarian, UnitGantiPassword,
+  UnitReleaseNotes, UnitHomeService, UnitSyslog, UnitUser, UnitSampling,
+  UnitLapPenjualan, UnitIsiHasilNoLab, UnitLapDokter, UnitTest, UnitCetakHasil,
+  UnitIsiHasilPx;
+
+function MainForm: TMainForm;
+begin
+  Result := TMainForm(UniMainModule.GetFormInstance(TMainForm));
+end;
+
+procedure TMainForm.mnLogoffClick(Sender: TObject);
+begin
+  Close;
+end;
+
+procedure TMainForm.mnPwdClick(Sender: TObject);
+begin
+  frmGantiPassword.ShowModal();
+end;
+
+procedure TMainForm.mnSamplingClick(Sender: TObject);
+begin
+  frmSampling.ShowModal();
+end;
+
+procedure TMainForm.mnTestClick(Sender: TObject);
+begin
+  frmTest.ShowModal();
+end;
+
+procedure TMainForm.mnFOHomeServiceClick(Sender: TObject);
+begin
+  frmHomeService.ShowModal();
+end;
+
+procedure TMainForm.mnFOLaporanShiftClick(Sender: TObject);
+begin
+  frmLaporanHarian.ShowModal();
+end;
+
+procedure TMainForm.mnCetakHasilClick(Sender: TObject);
+begin
+  frmCetakHasil.ShowModal();
+end;
+
+procedure TMainForm.mnFODaftarClick(Sender: TObject);
+begin
+  frmFODaftar.ShowModal();
+  frmFODaftar.call_form := 'main';
+end;
+
+procedure TMainForm.Rilisnote1Click(Sender: TObject);
+begin
+  frmReleaseNote.Show();
+end;
+
+procedure TMainForm.mnFOStatusClick(Sender: TObject);
+begin
+  frmFOStatus.ShowModal();
+end;
+
+procedure TMainForm.mnIsiHasilNolabClick(Sender: TObject);
+begin
+  frmIsiHasilNolab.ShowModal();
+end;
+
+procedure TMainForm.mnIsiHasilPxClick(Sender: TObject);
+begin
+  frmIsiHasilPx.ShowModal();
+end;
+
+procedure TMainForm.mnLapDokterClick(Sender: TObject);
+begin
+  frmLapDokter.ShowModal();
+end;
+
+procedure TMainForm.mnLapJualClick(Sender: TObject);
+begin
+  frmLapPenjualan.ShowModal();
+end;
+
+procedure TMainForm.mnLogClick(Sender: TObject);
+begin
+  frmSyslog.ShowModal();
+end;
+
+function FindMenuItemByCaption(AMainMenu: TUniMainMenu; const Caption: String)
+  : TUniMenuItem;
+
+  function FindItemInner(Item: TUniMenuItem; const Caption: String)
+    : TUniMenuItem;
+  var
+    i: Integer;
+  begin
+    Result := Nil;
+    if Item.Caption = Caption then
+    begin
+      Result := Item;
+      exit;
+    end
+    else
+    begin
+      for i := 0 to Item.Count - 1 do
+      begin
+        Result := FindItemInner(Item.Items[i], Caption);
+        if Result <> Nil then
+          Break;
+      end;
+    end;
+  end;
+
+begin
+  Result := FindItemInner(AMainMenu.Items, Caption);
+end;
+
+function FindMenuItemByName(AMainMenu: TUniMainMenu; const Name: String)
+  : TUniMenuItem;
+
+  function FindItemInner(Item: TUniMenuItem; const Caption: String)
+    : TUniMenuItem;
+  var
+    i: Integer;
+  begin
+    Result := Nil;
+    if Item.Name = Name then
+    begin
+      Result := Item;
+      exit;
+    end
+    else
+    begin
+      for i := 0 to Item.Count - 1 do
+      begin
+        Result := FindItemInner(Item.Items[i], Name);
+        if Result <> Nil then
+          Break;
+      end;
+    end;
+  end;
+
+begin
+  Result := FindItemInner(AMainMenu.Items, Name);
+end;
+
+// Bypass of Source.Items (it's clone of IterateMenus from Menu unit)
+
+procedure BypassMenuItem(Func: Pointer; Source: TMenuItem);
+var
+  i, J: Integer;
+  MenuSize: Integer;
+  Done: Boolean;
+
+  function ByPass(var i: Integer; aMenuItem: TMenuItem; AFunc: Pointer)
+    : Boolean;
+  var
+    Item: TMenuItem;
+  begin
+    if aMenuItem = nil then
+      exit;
+    Result := False;
+
+    while not Result and (i < aMenuItem.Count) do
+    begin
+      Item := aMenuItem[i];
+      asm
+        MOV     EAX,Item
+        MOV     EDX,[EBP+8]
+        PUSH    DWORD PTR [EDX]
+        CALL    DWORD PTR AFunc
+        ADD     ESP,4
+        MOV     Result,AL
+      end;
+      Inc(i);
+    end;
+  end;
+
+begin
+  i := 0;
+  J := 0;
+  MenuSize := 0;
+  if Source <> nil then
+    MenuSize := Source.Count;
+  Done := False;
+  while not Done and (i < MenuSize) do
+  begin
+    Done := ByPass(i, Source, Func);
+    while (i < MenuSize) do
+      Inc(i);
+  end;
+end;
+
+// Finds Item.Name = ItemName  in the aMenuItem.Items
+// Returns found item or nil.
+function FindItemByName(aMenuItem: TUniMenuItem; ItemName: string)
+  : TUniMenuItem;
+// As variant: ItemTag:Integer; instead ItemName
+
+  function Find(Item: TUniMenuItem): Boolean;
+  var
+    i: Integer;
+
+  begin
+    Result := False;
+    if (StringValue = Item.Name) then
+    // As variant: if (IntegerValue = Item.Tag)  then
+    begin
+      FoundItem := Item;
+      Result := True;
+      exit;
+    end
+    else
+      for i := 0 to Item.Count - 1 do
+        if Find(Item[i]) then
+        begin
+          Result := True;
+          exit;
+        end;
+  end;
+
+begin
+  FoundItem := nil;
+  StringValue := ItemName; // Assigns Find argument to global variable.
+  // As variant: IntegerValue := ItemTag;
+
+  BypassMenuItem(@Find, aMenuItem);
+  Result := FoundItem;
+end;
+
+procedure TMainForm.UniFormAfterShow(Sender: TObject);
+var
+  i: Integer;
+  Data, aktif: string;
+  ItemToFind: TUniMenuItem;
+begin
+  if QMenu.Active then
+    QMenu.Active := False;
+  QMenu.ParamByName('USER_ID').Value := UniApplication.Cookies.GetCookie
+    ('UserId');
+  QMenu.Active := True;
+
+
+  // ItemToFind := FindMenuItemByName(UniMainMenu1, 'mnSystem');
+  // if ItemToFind<>Nil then
+  // showMessage(ItemToFind.Caption);
+  // exit;
+
+  QMenu.First;
+  while not QMenu.Eof do
+  begin
+    Data := QMenu.FieldByName('name').AsString;
+    aktif := QMenu.FieldByName('aktif').AsString;
+    ItemToFind := FindMenuItemByName(UniMainMenu1, Data);
+    /// showMessage(Data);
+    if ItemToFind <> Nil then
+    begin
+      if aktif = 'Y' then
+        ItemToFind.Visible := True
+      else
+        ItemToFind.Visible := False;
+    end;
+    QMenu.Next;
+  end;
+end;
+
+procedure TMainForm.UniFormKeyUp(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if (Key = 65) and (Shift = [ssCtrl]) then
+  begin
+    frmFODaftar.ShowModal();
+  end;
+  if (Key = 66) and (Shift = [ssCtrl]) then
+  begin
+    frmFOStatus.ShowModal();
+  end;
+end;
+
+procedure TMainForm.mnUserClick(Sender: TObject);
+begin
+  frmUser.ShowModal();
+end;
+
+initialization
+
+RegisterAppFormClass(TMainForm);
+
+end.

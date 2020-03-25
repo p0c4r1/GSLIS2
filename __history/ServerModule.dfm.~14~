@@ -1,0 +1,42 @@
+object UniServerModule: TUniServerModule
+  OldCreateOrder = False
+  OnCreate = UniGUIServerModuleCreate
+  OnDestroy = UniGUIServerModuleDestroy
+  AutoCoInitialize = True
+  TempFolder = 'temp\'
+  Port = 80
+  Title = 'GSLIS2 [ 0.0.0.2 ]'
+  SuppressErrors = []
+  Bindings = <>
+  MainFormDisplayMode = mfPage
+  CustomFiles.Strings = (
+    'files\dependencies\rsvp-3.1.0.min.js'
+    'files\dependencies\sha-256.min.js'
+    'files\qz-tray.js'
+    'files\qz-tray-cert.js'
+    'files\jsrsasign-all-min.js'
+    'files\webcam.min.js')
+  SSL.Enabled = True
+  SSL.SSLOptions.RootCertFile = 'root.pem'
+  SSL.SSLOptions.CertFile = 'cert.pem'
+  SSL.SSLOptions.KeyFile = 'key.pem'
+  SSL.SSLOptions.Method = sslvTLSv1_1
+  SSL.SSLOptions.SSLVersions = [sslvTLSv1_1]
+  SSL.SSLOptions.Mode = sslmUnassigned
+  SSL.SSLOptions.VerifyMode = []
+  SSL.SSLOptions.VerifyDepth = 0
+  SSL.SSLPort = 443
+  ConnectionFailureRecovery.ErrorMessage = 'Connection Error'
+  ConnectionFailureRecovery.RetryMessage = 'Retrying...'
+  Height = 150
+  Width = 215
+  object FDManager1: TFDManager
+    WaitCursor = gcrNone
+    FormatOptions.AssignedValues = [fvMapRules]
+    FormatOptions.OwnMapRules = True
+    FormatOptions.MapRules = <>
+    Active = True
+    Left = 48
+    Top = 40
+  end
+end

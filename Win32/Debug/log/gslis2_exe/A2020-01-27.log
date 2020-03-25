@@ -1,0 +1,6 @@
+GSLIS2.exe: 000018EC: 22:24:56 []:>--------------------------------------------------------------<
+GSLIS2.exe: 000018EC: 22:24:56 [TUniServerModule]:Server First Init.
+GSLIS2.exe: 000018EC: 22:24:56 [TUniServerModule]:Debug Mode = ON
+GSLIS2.exe: 000018EC: 22:24:56 [TUniServerModule]:Global Cache Folder Erased. <11> Files deleted.
+GSLIS2.exe: 000018EC: 22:24:56 [TUniServerModule]:Starting HTTP Server on Port: 80...
+GSLIS2.exe: 000018EC: 22:24:58 [TUniServerModule]:HTTP Server Started on Port: 80

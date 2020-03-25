@@ -1,0 +1,13 @@
+object frmSysLog: TfrmSysLog
+  Left = 0
+  Top = 0
+  ClientHeight = 210
+  ClientWidth = 458
+  Caption = 'Syslog'
+  BorderStyle = bsDialog
+  OldCreateOrder = False
+  MonitoredKeys.Keys = <>
+  Font.Height = -16
+  PixelsPerInch = 96
+  TextHeight = 19
+end

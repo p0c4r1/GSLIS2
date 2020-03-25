@@ -1,0 +1,154 @@
+object MainForm: TMainForm
+  Left = 0
+  Top = 0
+  ClientHeight = 677
+  ClientWidth = 916
+  Caption = 'GSLIS2'
+  OldCreateOrder = False
+  OnKeyUp = UniFormKeyUp
+  Menu = UniMainMenu1
+  MonitoredKeys.Keys = <
+    item
+      KeyStart = 112
+      KeyEnd = 123
+      HandleBrowser = False
+    end>
+  OnAfterShow = UniFormAfterShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object UniContainerPanel1: TUniContainerPanel
+    Left = 0
+    Top = 0
+    Width = 916
+    Height = 677
+    Hint = ''
+    ParentColor = False
+    Align = alClient
+    TabOrder = 0
+    object UniPageControl1: TUniPageControl
+      Left = 0
+      Top = 0
+      Width = 916
+      Height = 677
+      Hint = ''
+      Align = alClient
+      TabOrder = 1
+    end
+  end
+  object UniMainMenu1: TUniMainMenu
+    Left = 48
+    Top = 40
+    object mnSystem: TUniMenuItem
+      Caption = 'System'
+      object mnLogoff: TUniMenuItem
+        Caption = 'Logoff'
+        OnClick = mnLogoffClick
+      end
+      object mnPwd: TUniMenuItem
+        Caption = 'Ganti Password'
+        OnClick = mnPwdClick
+      end
+      object mnLog: TUniMenuItem
+        Caption = 'System Log'
+        OnClick = mnLogClick
+      end
+    end
+    object mnFO: TUniMenuItem
+      Caption = 'Front Office'
+      object mnFODaftar: TUniMenuItem
+        Caption = 'Pendaftaran (Ctrl+A)'
+        ShortCut = 16449
+        OnClick = mnFODaftarClick
+      end
+      object mnFOStatus: TUniMenuItem
+        Caption = 'Status hasil/Pembayaran (Ctrl+B)'
+        OnClick = mnFOStatusClick
+      end
+      object mnFOLaporanShift: TUniMenuItem
+        Caption = 'Laporan Harian'
+        OnClick = mnFOLaporanShiftClick
+      end
+      object mnFOHomeService: TUniMenuItem
+        Caption = 'Home Service'
+        OnClick = mnFOHomeServiceClick
+      end
+    end
+    object mnProses: TUniMenuItem
+      Caption = 'Proses'
+      object mnSampling: TUniMenuItem
+        Caption = 'Sampling'
+        OnClick = mnSamplingClick
+      end
+      object mnIsiHasil: TUniMenuItem
+        Caption = 'Isi Hasil'
+        object mnIsiHasilNolab: TUniMenuItem
+          Caption = 'By Nomor Lab'
+          OnClick = mnIsiHasilNolabClick
+        end
+      end
+      object mnCetakHasil: TUniMenuItem
+        Caption = 'Cetak Hasil'
+        OnClick = mnCetakHasilClick
+      end
+    end
+    object mnLap: TUniMenuItem
+      Caption = 'Laporan'
+      object mnLapJual: TUniMenuItem
+        Caption = 'Penjualan'
+        OnClick = mnLapJualClick
+      end
+      object mnLapDokter: TUniMenuItem
+        Caption = 'Dokter'
+        OnClick = mnLapDokterClick
+      end
+    end
+    object mnAdmin: TUniMenuItem
+      Caption = 'Administrasi'
+      object mnUser: TUniMenuItem
+        Caption = 'User'
+        OnClick = mnUserClick
+      end
+      object mnTestInduk: TUniMenuItem
+        Caption = 'Test'
+        Visible = False
+        object mnTest: TUniMenuItem
+          Caption = 'Test'
+          OnClick = mnTestClick
+        end
+      end
+    end
+    object N1: TUniMenuItem
+      Caption = '?'
+      object Rilisnote1: TUniMenuItem
+        Caption = 'Rilis note'
+        OnClick = Rilisnote1Click
+      end
+    end
+  end
+  object QMenu: TFDQuery
+    Connection = UniMainModule.FDConnection1
+    SQL.Strings = (
+      
+        'select distinct m.id,m.name ,case when um.id is NULL then '#39'N'#39' el' +
+        'se '#39'Y'#39' end aktif'
+      'from'
+      'menu m'
+      
+        'left join user_menu um on m.id = um.menu_id and um.user_id = :us' +
+        'er_id')
+    Left = 264
+    Top = 208
+    ParamData = <
+      item
+        Name = 'USER_ID'
+        DataType = ftString
+        ParamType = ptInput
+        Value = '1'
+      end>
+  end
+  object DataSource1: TDataSource
+    DataSet = QMenu
+    Left = 576
+    Top = 232
+  end
+end

@@ -1,0 +1,226 @@
+unit UnitTest;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics,
+  Controls, Forms, uniGUITypes, uniGUIAbstractClasses,
+  uniGUIClasses, uniGUIForm, uniGUIBaseClasses, uniPanel, uniButton,
+  uniTreeView,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, Data.DB, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client, uniEdit, uniLabel, uniComboBox, uniMultiItem,
+  uniDBComboBox, uniDBLookupComboBox, uniCheckBox;
+
+type
+  TfrmTest = class(TUniForm)
+    UniContainerPanel1: TUniContainerPanel;
+    UniContainerPanel2: TUniContainerPanel;
+    UniContainerPanel3: TUniContainerPanel;
+    tvTest: TUniTreeView;
+    UniButton1: TUniButton;
+    btnEdit: TUniButton;
+    UniButton3: TUniButton;
+    btnExit: TUniButton;
+    UniButton5: TUniButton;
+    UniButton6: TUniButton;
+    qMTest0: TFDQuery;
+    QMTest1: TFDQuery;
+    qMTest2: TFDQuery;
+    UniLabel1: TUniLabel;
+    edNama: TUniEdit;
+    UniLabel2: TUniLabel;
+    cbLayanan: TUniDBLookupComboBox;
+    QLayanan: TFDQuery;
+    DSLayanan: TDataSource;
+    cbPaket: TUniComboBox;
+    cbKelompok: TUniDBLookupComboBox;
+    UniDBLookupComboBox2: TUniDBLookupComboBox;
+    UniEdit2: TUniEdit;
+    UniEdit3: TUniEdit;
+    UniLabel3: TUniLabel;
+    UniLabel4: TUniLabel;
+    UniLabel5: TUniLabel;
+    UniLabel6: TUniLabel;
+    UniLabel7: TUniLabel;
+    UniLabel8: TUniLabel;
+    UniLabel9: TUniLabel;
+    UniLabel10: TUniLabel;
+    UniLabel11: TUniLabel;
+    UniLabel12: TUniLabel;
+    UniLabel13: TUniLabel;
+    UniCheckBox1: TUniCheckBox;
+    UniCheckBox2: TUniCheckBox;
+    UniCheckBox3: TUniCheckBox;
+    UniCheckBox4: TUniCheckBox;
+    UniCheckBox5: TUniCheckBox;
+    UniCheckBox6: TUniCheckBox;
+    UniDBLookupComboBox3: TUniDBLookupComboBox;
+    UniLabel14: TUniLabel;
+    UniLabel15: TUniLabel;
+    UniEdit4: TUniEdit;
+    UniLabel16: TUniLabel;
+    UniEdit5: TUniEdit;
+    UniLabel17: TUniLabel;
+    UniDBLookupComboBox4: TUniDBLookupComboBox;
+    UniLabel18: TUniLabel;
+    UniEdit6: TUniEdit;
+    UniLabel19: TUniLabel;
+    UniEdit7: TUniEdit;
+    UniLabel20: TUniLabel;
+    QLayananid: TFDAutoIncField;
+    QLayanannama: TStringField;
+    UniNumberEdit1: TUniNumberEdit;
+    DSKelompok: TDataSource;
+    QKelompok: TFDQuery;
+    FDAutoIncField1: TFDAutoIncField;
+    StringField1: TStringField;
+    procedure btnExitClick(Sender: TObject);
+    procedure btnEditClick(Sender: TObject);
+    procedure UniFormAfterShow(Sender: TObject);
+    procedure UniFormBeforeShow(Sender: TObject);
+    procedure cbLayananChangeValue(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+function frmTest: TfrmTest;
+
+implementation
+
+{$R *.dfm}
+
+uses
+  MainModule, uniGUIApplication;
+
+procedure loadTest();
+var
+  node0, node1, node2: TUniTreeNode;
+begin
+  frmTest.ShowMask('Loading');
+  frmTest.UniSession.Synchronize();
+
+  frmTest.tvTest.Items.Clear;
+
+  if frmTest.qMTest0.Active then
+    frmTest.qMTest0.Active := False;
+  frmTest.qMTest0.SQL.Text := 'select id,concat(kode,' + QuotedStr(' - ') +
+    ',nama) nama    from test where level=1 order by kode ';
+  frmTest.qMTest0.Active := True;
+
+  // menu
+  frmTest.qMTest0.First;
+  while not frmTest.qMTest0.Eof do
+  begin
+    node0 := frmTest.tvTest.Items.Add(nil, frmTest.qMTest0.FieldByName('nama')
+      .AsString);
+    node0.Tag := frmTest.qMTest0.FieldByName('id').AsInteger;
+
+    // level 2
+    if frmTest.QMTest1.Active then
+      frmTest.QMTest1.Active := False;
+    frmTest.QMTest1.SQL.Text := 'select id,concat(kode,' + QuotedStr(' - ') +
+      ',nama) nama    from test where induk_kode_id = ' +
+      QuotedStr(frmTest.qMTest0.FieldByName('id').AsString) +
+      ' and level = 2 order by kode ';
+    frmTest.QMTest1.Active := True;
+
+    if frmTest.QMTest1.RecordCount > 0 then
+    begin
+      frmTest.QMTest1.First;
+      while not frmTest.QMTest1.Eof do
+      begin
+        node1 := frmTest.tvTest.Items.AddChild(node0,
+          frmTest.QMTest1.FieldByName('nama').AsString);
+        node1.Tag := frmTest.QMTest1.FieldByName('id').AsInteger;
+
+        // level 3
+        if frmTest.qMTest2.Active then
+          frmTest.qMTest2.Active := False;
+        frmTest.qMTest2.SQL.Text := 'select id,concat(kode,' + QuotedStr(' - ')
+          + ',nama) nama    from test where induk_kode_id = ' +
+          QuotedStr(frmTest.QMTest1.FieldByName('id').AsString) +
+          ' and level = 3 order by kode ';
+        frmTest.qMTest2.Active := True;
+
+        if frmTest.qMTest2.RecordCount > 0 then
+        begin
+          frmTest.qMTest2.First;
+          while not frmTest.qMTest2.Eof do
+          begin
+            node2 := frmTest.tvTest.Items.AddChild(node1,
+              frmTest.qMTest2.FieldByName('nama').AsString);
+            node2.Tag := frmTest.qMTest2.FieldByName('id').AsInteger;
+
+            frmTest.qMTest2.Next;
+          end;
+
+        end;
+
+        frmTest.QMTest1.Next;
+      end;
+
+    end;
+
+    frmTest.qMTest0.Next;
+  end;
+
+  frmTest.HideMask;
+end;
+
+function frmTest: TfrmTest;
+begin
+  Result := TfrmTest(UniMainModule.GetFormInstance(TfrmTest));
+end;
+
+procedure TfrmTest.btnEditClick(Sender: TObject);
+var
+  selNode: TUniTreeNode;
+begin
+  selNode := tvTest.Selected;
+  if selNode <> nil then
+  begin
+    if qMTest0.Active then
+      qMTest0.Active := False;
+    qMTest0.SQL.Text := ' select * from test where id = ' +
+      QuotedStr(IntToStr(selNode.Tag)) + ' ';
+    qMTest0.Active := True;
+
+    //
+    edNama.Text := qMTest0.FieldByName('nama').AsString;
+
+  end;
+
+end;
+
+procedure TfrmTest.btnExitClick(Sender: TObject);
+begin
+  Close();
+end;
+
+procedure TfrmTest.cbLayananChangeValue(Sender: TObject);
+begin
+cbKelompok.Clear;
+  if QKelompok.Active then
+    QKelompok.Active := False;
+  QKelompok.ParamByName('layanan_id').Value := QLayanan.FieldByName('id')
+    .AsInteger;
+  QKelompok.Active := True;
+end;
+
+procedure TfrmTest.UniFormAfterShow(Sender: TObject);
+begin
+  loadTest();
+end;
+
+procedure TfrmTest.UniFormBeforeShow(Sender: TObject);
+begin
+  if QLayanan.Active then
+    QLayanan.Active := False;
+  QLayanan.Active := True;
+end;
+
+end.

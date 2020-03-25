@@ -1,0 +1,173 @@
+unit UnitCetakHasil;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics,
+  Controls, Forms, uniGUITypes, uniGUIAbstractClasses,
+  uniGUIClasses, uniGUIForm, uniBasicGrid, uniDBGrid, uniEdit, uniLabel,
+  uniButton, uniGUIBaseClasses, uniPanel, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+
+type
+  TfrmCetakHasil = class(TUniForm)
+    pnlHeader: TUniContainerPanel;
+    pnlContent: TUniContainerPanel;
+    pnlFooter: TUniContainerPanel;
+    btnPrint: TUniButton;
+    btnExit: TUniButton;
+    UniLabel1: TUniLabel;
+    edTgl: TUniEdit;
+    btnSearch: TUniButton;
+    edNomor: TUniEdit;
+    edNama: TUniEdit;
+    UniLabel2: TUniLabel;
+    UniLabel3: TUniLabel;
+    lblStatus: TUniLabel;
+    UniDBGrid1: TUniDBGrid;
+    QOrder: TFDQuery;
+    DSOrder: TDataSource;
+    UniButton1: TUniButton;
+    procedure UniFormCreate(Sender: TObject);
+    procedure UniFormBeforeShow(Sender: TObject);
+    procedure btnSearchClick(Sender: TObject);
+    procedure btnExitClick(Sender: TObject);
+    procedure edTglKeyPress(Sender: TObject; var Key: Char);
+    procedure btnPrintClick(Sender: TObject);
+    procedure UniButton1Click(Sender: TObject);
+    procedure UniDBGrid1SelectionChange(Sender: TObject);
+    procedure UniDBGrid1KeyPress(Sender: TObject; var Key: Char);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+function frmCetakHasil: TfrmCetakHasil;
+
+implementation
+
+{$R *.dfm}
+
+uses
+  MainModule, uniGUIApplication, UnitJasper, UnitReportDisplay;
+
+function frmCetakHasil: TfrmCetakHasil;
+begin
+  Result := TfrmCetakHasil(UniMainModule.GetFormInstance(TfrmCetakHasil));
+end;
+
+procedure TfrmCetakHasil.btnExitClick(Sender: TObject);
+begin
+  Close;
+end;
+
+procedure TfrmCetakHasil.btnPrintClick(Sender: TObject);
+var
+  Result: string;
+  nama_report: string;
+begin
+  ShowMask('Loading');
+  UniSession.Synchronize();
+  nama_report := 'report_hasil';
+
+  frmReportDisplay.UniURLFrame1.URL := reportExecReqParams('pdf', nama_report,
+    QOrder.FieldByName('id').AsString, '', '');
+  frmReportDisplay.ShowModal();
+  HideMask;
+end;
+
+procedure TfrmCetakHasil.btnSearchClick(Sender: TObject);
+begin
+  ShowMask('Loading');
+  UniSession.Synchronize();
+  if QOrder.Active then
+    QOrder.Active := False;
+  QOrder.SQL.Clear;
+  QOrder.SQL.Add
+    (' select oh.id,left(oh.tanggal,10) tanggal,oh.nomor,oh.pasien_id,p.nama as nama_pasien,oh.flgLunas,oh.cetak, p.alamat,p.telepon,d.nama as dokter ');
+  QOrder.SQL.Add(' from order_header oh,pasien p, dokter d ');
+  QOrder.SQL.Add
+    (' where oh.pasien_id= p.id and oh.dokter_id = d.id and flgBatal=' +
+    QuotedStr('N') + ' ');
+  QOrder.SQL.Add(' and  left(oh.tanggal,10) = :tanggal ');
+  QOrder.ParamByName('tanggal').Value := edTgl.Text;
+  if edNomor.Text <> '' then
+    QOrder.SQL.Add(' and oh.nomor like ''%' + edNomor.Text + '%''');
+  if edNama.Text <> '' then
+    QOrder.SQL.Add(' and p.nama like ''%' + edNama.Text + '%''');
+  QOrder.SQL.Add(' order by oh.nomor');
+  QOrder.Active := True;
+  HideMask;
+end;
+
+procedure TfrmCetakHasil.edTglKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Ord(Key) = VK_RETURN then
+  begin
+    btnSearchClick(self);
+  end;
+end;
+
+procedure TfrmCetakHasil.UniButton1Click(Sender: TObject);
+var
+  Result: string;
+  nama_report: string;
+begin
+  nama_report := 'report_hasil_historical';
+
+  ShowMask('Loading');
+  UniSession.Synchronize();
+
+  frmReportDisplay.UniURLFrame1.URL := reportExecReqParams('pdf', nama_report,
+    QOrder.FieldByName('pasien_id').AsString, '', '');
+  frmReportDisplay.ShowModal();
+  HideMask;
+end;
+
+procedure TfrmCetakHasil.UniDBGrid1KeyPress(Sender: TObject; var Key: Char);
+begin
+  UniDBGrid1SelectionChange(self);
+end;
+
+procedure TfrmCetakHasil.UniDBGrid1SelectionChange(Sender: TObject);
+
+begin
+  if QOrder.RecordCount > 0 then
+  begin
+    lblStatus.Visible := True;
+    if QOrder.FieldByName('flgLunas').AsString = 'Y' then
+    begin
+      lblStatus.Caption := 'SUDAH LUNAS, ';
+      lblStatus.Font.Color := clWindowText;
+    end
+    else
+    begin
+      lblStatus.Caption := 'SUDAH LUNAS, ';
+      lblStatus.Font.Color := clInfoBk;
+    end;
+    if QOrder.FieldByName('cetak').AsString = 'Y' then
+      lblStatus.Caption := lblStatus.Caption + 'HASIL SUDAH DICETAK'
+    else
+      lblStatus.Caption := lblStatus.Caption + 'HASIL BELUM DICETAK';
+  end
+  else
+    lblStatus.Visible := False;
+end;
+
+procedure TfrmCetakHasil.UniFormBeforeShow(Sender: TObject);
+begin
+  if QOrder.Active then
+    QOrder.Active := False;
+  QOrder.ParamByName('tanggal').Value := edTgl.Text;
+  QOrder.Active := True;
+end;
+
+procedure TfrmCetakHasil.UniFormCreate(Sender: TObject);
+begin
+  edTgl.Text := FormatDateTime('YYYY-MM-dd', Now);
+end;
+
+end.

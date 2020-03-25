@@ -1,0 +1,50 @@
+unit UnitSyslog;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics,
+  Controls, Forms, uniGUITypes, uniGUIAbstractClasses,
+  uniGUIClasses, uniGUIForm, uniButton, uniEdit, uniGUIBaseClasses, uniLabel,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, frxClass, frxExportPDF, frxDBSet, Data.DB,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+
+type
+  TfrmSysLog = class(TUniForm)
+    UniLabel1: TUniLabel;
+    edNomor: TUniEdit;
+    UniButton1: TUniButton;
+    UniButton2: TUniButton;
+    frxSyslog: TfrxReport;
+    qSyslog: TFDQuery;
+    frxDBDataset2: TfrxDBDataset;
+    frxPDFExport1: TfrxPDFExport;
+    procedure UniButton2Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+function frmSysLog: TfrmSysLog;
+
+implementation
+
+{$R *.dfm}
+
+uses
+  MainModule, uniGUIApplication;
+
+function frmSysLog: TfrmSysLog;
+begin
+  Result := TfrmSysLog(UniMainModule.GetFormInstance(TfrmSysLog));
+end;
+
+procedure TfrmSysLog.UniButton2Click(Sender: TObject);
+begin
+Close;
+end;
+
+end.

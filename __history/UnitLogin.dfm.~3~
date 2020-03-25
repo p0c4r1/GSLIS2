@@ -1,0 +1,80 @@
+object UniLoginForm1: TUniLoginForm1
+  Left = 0
+  Top = 0
+  ClientHeight = 212
+  ClientWidth = 417
+  Caption = 'Login'
+  OldCreateOrder = False
+  BorderIcons = [biSystemMenu]
+  MonitoredKeys.Keys = <>
+  Font.Height = -16
+  PixelsPerInch = 96
+  TextHeight = 19
+  object UniButton1: TUniButton
+    Left = 8
+    Top = 175
+    Width = 113
+    Height = 29
+    Hint = ''
+    Caption = '&Batal'
+    TabOrder = 0
+    OnClick = UniButton1Click
+  end
+  object UniButton2: TUniButton
+    Left = 312
+    Top = 175
+    Width = 99
+    Height = 29
+    Hint = ''
+    Caption = 'Login'
+    TabOrder = 1
+    Default = True
+    OnClick = UniButton2Click
+  end
+  object UniPanel1: TUniPanel
+    Left = 0
+    Top = 0
+    Width = 417
+    Height = 169
+    Hint = ''
+    Align = alTop
+    TabOrder = 2
+    Caption = ''
+    ExplicitWidth = 488
+  end
+  object UniLabel1: TUniLabel
+    Left = 56
+    Top = 40
+    Width = 32
+    Height = 19
+    Hint = ''
+    Caption = 'User'
+    TabOrder = 3
+  end
+  object UniLabel2: TUniLabel
+    Left = 56
+    Top = 80
+    Width = 67
+    Height = 19
+    Hint = ''
+    Caption = 'Password'
+    TabOrder = 4
+  end
+  object UniEdit1: TUniEdit
+    Left = 144
+    Top = 40
+    Width = 201
+    Hint = ''
+    Text = 'ADMIN'
+    TabOrder = 5
+  end
+  object UniEdit2: TUniEdit
+    Left = 144
+    Top = 80
+    Width = 201
+    Hint = ''
+    PasswordChar = '*'
+    Text = 'UniEdit1'
+    TabOrder = 6
+  end
+end

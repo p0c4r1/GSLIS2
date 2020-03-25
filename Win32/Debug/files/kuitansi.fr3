@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<TfrxReport Version="5.2.3" DotMatrixReport="False" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="4095" PreviewOptions.Zoom="1" PrintOptions.Printer="Default" PrintOptions.PrintOnSheet="0" ReportOptions.CreateDate="43541.1050954861" ReportOptions.Description.Text="" ReportOptions.LastChange="43582.4506271528" ScriptLanguage="PascalScript" ScriptText.Text="begin&#13;&#10;&#13;&#10;end.">
+  <Datasets>
+    <item DataSet="frxDBDataset1" DataSetName="frxDBDataset1"/>
+  </Datasets>
+  <TfrxDataPage Name="Data" Height="1000" Left="0" Top="0" Width="1000"/>
+  <TfrxReportPage Name="Page1" PaperWidth="148" PaperHeight="210" PaperSize="11" LeftMargin="10" RightMargin="10" TopMargin="10" BottomMargin="10" ColumnWidth="0" ColumnPositions.Text="" HGuides.Text="" VGuides.Text="">
+    <TfrxMasterData Name="MasterData1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Height="49.13389" Left="0" Top="291.02381" Width="483.77984" ColumnWidth="0" ColumnGap="0" DataSet="frxDBDataset1" DataSetName="frxDBDataset1" RowCount="0">
+      <TfrxMemoView Name="frxDBDataset1pemeriksaan" Left="56.69295" Top="3.77953" Width="400.63018" Height="18.89765" DataField="pemeriksaan" DataSet="frxDBDataset1" DataSetName="frxDBDataset1" Font.Charset="1" Font.Color="0" Font.Height="-16" Font.Name="Arial" Font.Style="0" HAlign="haCenter" ParentFont="False" Text="[frxDBDataset1.&#34;pemeriksaan&#34;]"/>
+      <TfrxMemoView Name="frxDBDataset1harga" Left="559.37044" Top="7.55906" Width="105.82684" Height="18.89765" DataField="harga" DataSet="frxDBDataset1" DataSetName="frxDBDataset1" Font.Charset="1" Font.Color="0" Font.Height="-16" Font.Name="Arial" Font.Style="0" HAlign="haCenter" ParentFont="False" Text="[frxDBDataset1.&#34;harga&#34;]"/>
+    </TfrxMasterData>
+    <TfrxHeader Name="Header1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Height="22.67718" Left="0" Top="245.66945" Width="483.77984">
+      <TfrxMemoView Name="Memo2" Left="22.67718" Top="3.77953" Width="166.29932" Height="15.11812" Font.Charset="1" Font.Color="0" Font.Height="-16" Font.Name="Arial" Font.Style="0" HAlign="haCenter" ParentFont="False" Text="Pemeriksaan"/>
+      <TfrxMemoView Name="Memo3" Left="544.25232" Top="9.43689570931383E-15" Width="143.62214" Height="15.11812" Font.Charset="1" Font.Color="0" Font.Height="-16" Font.Name="Arial" Font.Style="0" HAlign="haCenter" ParentFont="False" Text="Harga"/>
+    </TfrxHeader>
+    <TfrxReportTitle Name="ReportTitle1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Height="166.29932" Left="0" Top="18.89765" Width="483.77984">
+      <TfrxMemoView Name="Memo1" Left="0" Top="0" Width="483.77984" Height="30.23624" Font.Charset="1" Font.Color="0" Font.Height="-19" Font.Name="Arial" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="Kwitansi"/>
+      <TfrxMemoView Name="frxDBDataset1nama" Left="34.01577" Top="41.57483" Width="177.63791" Height="18.89765" DataField="nama" DataSet="frxDBDataset1" DataSetName="frxDBDataset1" Text="[frxDBDataset1.&#34;nama&#34;]"/>
+      <TfrxMemoView Name="Memo4" Left="7.55906" Top="45.35436" Width="177.63791" Height="75.5906" Text="Nama"/>
+    </TfrxReportTitle>
+    <TfrxFooter Name="Footer1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Height="22.67718" Left="0" Top="362.83488" Width="483.77984"/>
+  </TfrxReportPage>
+</TfrxReport>

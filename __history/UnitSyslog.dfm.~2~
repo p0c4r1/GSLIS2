@@ -1,0 +1,51 @@
+object frmSysLog: TfrmSysLog
+  Left = 0
+  Top = 0
+  ClientHeight = 138
+  ClientWidth = 329
+  Caption = 'Syslog'
+  BorderStyle = bsDialog
+  OldCreateOrder = False
+  MonitoredKeys.Keys = <>
+  Font.Height = -16
+  PixelsPerInch = 96
+  TextHeight = 19
+  object UniLabel1: TUniLabel
+    Left = 24
+    Top = 24
+    Width = 55
+    Height = 19
+    Hint = ''
+    Caption = 'No. Lab'
+    TabOrder = 0
+  end
+  object UniEdit1: TUniEdit
+    Left = 96
+    Top = 24
+    Width = 185
+    Hint = ''
+    Text = 'UniEdit1'
+    TabOrder = 1
+  end
+  object UniButton1: TUniButton
+    Left = 109
+    Top = 72
+    Width = 83
+    Height = 41
+    Hint = ''
+    Caption = 'View'
+    TabOrder = 2
+    Default = True
+  end
+  object UniButton2: TUniButton
+    Left = 198
+    Top = 72
+    Width = 83
+    Height = 41
+    Hint = ''
+    Caption = 'Batal'
+    TabOrder = 3
+    Default = True
+    OnClick = UniButton2Click
+  end
+end

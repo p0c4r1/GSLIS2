@@ -1,0 +1,45 @@
+GSLIS2.exe: 00001CC4: 13:38:03 []:>--------------------------------------------------------------<
+GSLIS2.exe: 00001CC4: 13:38:03 [TUniServerModule]:Server First Init.
+GSLIS2.exe: 00001CC4: 13:38:03 [TUniServerModule]:Debug Mode = ON
+GSLIS2.exe: 00001CC4: 13:38:03 [TUniServerModule]:Global Cache Folder Erased. <11> Files deleted.
+GSLIS2.exe: 00001CC4: 13:38:03 [TUniServerModule]:Starting HTTP Server on Port: 80...
+GSLIS2.exe: 00001CC4: 13:38:04 [TUniServerModule]:HTTP Server Started on Port: 80
+GSLIS2.exe: 00000C80: 13:42:15 []:>--------------------------------------------------------------<
+GSLIS2.exe: 00000C80: 13:42:15 [TUniServerModule]:Server First Init.
+GSLIS2.exe: 00000C80: 13:42:15 [TUniServerModule]:Debug Mode = ON
+GSLIS2.exe: 00000C80: 13:42:15 [TUniServerModule]:Global Cache Folder Erased. <6> Files deleted.
+GSLIS2.exe: 00000C80: 13:42:15 [TUniServerModule]:Starting HTTP Server on Port: 80...
+GSLIS2.exe: 00000C80: 13:42:16 [TUniServerModule]:HTTP Server Started on Port: 80
+GSLIS2.exe: 00001474: 13:42:34 [127.0.0.1]:EUniSessionException : Invalid session or session Timeout. : Addr: $008E7C6D
+GSLIS2.exe: 00000844: 13:43:21 []:>--------------------------------------------------------------<
+GSLIS2.exe: 00000844: 13:43:21 [TUniServerModule]:Server First Init.
+GSLIS2.exe: 00000844: 13:43:21 [TUniServerModule]:Debug Mode = ON
+GSLIS2.exe: 00000844: 13:43:21 [TUniServerModule]:Global Cache Folder Erased. <5> Files deleted.
+GSLIS2.exe: 00000844: 13:43:21 [TUniServerModule]:Starting HTTP Server on Port: 80...
+GSLIS2.exe: 00000844: 13:43:22 [TUniServerModule]:HTTP Server Started on Port: 80
+GSLIS2.exe: 00001DE4: 13:43:23 [127.0.0.1]:EUniSessionException : Invalid session or session Timeout. : Addr: $008E7C6D
+GSLIS2.exe: 000012F4: 13:53:39 []:>--------------------------------------------------------------<
+GSLIS2.exe: 000012F4: 13:53:39 [TUniServerModule]:Server First Init.
+GSLIS2.exe: 000012F4: 13:53:39 [TUniServerModule]:Debug Mode = ON
+GSLIS2.exe: 000012F4: 13:53:39 [TUniServerModule]:Global Cache Folder Erased. <5> Files deleted.
+GSLIS2.exe: 000012F4: 13:53:39 [TUniServerModule]:Starting HTTP Server on Port: 80...
+GSLIS2.exe: 000012F4: 13:53:40 [TUniServerModule]:HTTP Server Started on Port: 80
+GSLIS2.exe: 00001868: 13:53:40 [127.0.0.1]:EUniSessionException : Invalid session or session Timeout. : Addr: $008E7C6D
+GSLIS2.exe: 000016E4: 13:54:43 []:>--------------------------------------------------------------<
+GSLIS2.exe: 000016E4: 13:54:43 [TUniServerModule]:Server First Init.
+GSLIS2.exe: 000016E4: 13:54:43 [TUniServerModule]:Debug Mode = ON
+GSLIS2.exe: 000016E4: 13:54:43 [TUniServerModule]:Global Cache Folder Erased. <6> Files deleted.
+GSLIS2.exe: 000016E4: 13:54:43 [TUniServerModule]:Starting HTTP Server on Port: 80...
+GSLIS2.exe: 000016E4: 13:54:44 [TUniServerModule]:HTTP Server Started on Port: 80
+GSLIS2.exe: 000006AC: 13:54:50 [127.0.0.1]:EUniSessionException : Invalid session or session Timeout. : Addr: $008E7C6D
+GSLIS2.exe: 00001FFC: 13:55:18 [127.0.0.1]:EMySQLNativeException : [FireDAC][Phys][MySQL] You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'left join aguser u on h.ambil_user_id = u.id  order by h.tanggal' at line 1 : Addr: $008EDDEA
+GSLIS2.exe: 00001690: 13:55:22 [127.0.0.1]:EDatabaseError : qPending: Field 'flg_ambil' not found : Addr: $00771882
+GSLIS2.exe: 000019CC: 13:55:34 [127.0.0.1]:EDatabaseError : qPending: Field 'flg_ambil' not found : Addr: $00771882
+GSLIS2.exe: 00001C38: 14:37:23 []:>--------------------------------------------------------------<
+GSLIS2.exe: 00001C38: 14:37:23 [TUniServerModule]:Server First Init.
+GSLIS2.exe: 00001C38: 14:37:23 [TUniServerModule]:Debug Mode = ON
+GSLIS2.exe: 00001C38: 14:37:23 [TUniServerModule]:Global Cache Folder Erased. <8> Files deleted.
+GSLIS2.exe: 00001C38: 14:37:23 [TUniServerModule]:Starting HTTP Server on Port: 80...
+GSLIS2.exe: 00001C38: 14:37:24 [TUniServerModule]:HTTP Server Started on Port: 80
+GSLIS2.exe: 00001298: 14:37:26 [127.0.0.1]:EUniSessionException : Invalid session or session Timeout. : Addr: $008E7C6D
+GSLIS2.exe: 00000AD0: 14:44:36 [127.0.0.1]:EMySQLNativeException : [FireDAC][Phys][MySQL] You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'left join aguser u on h.ambil_user_id = u.id  order by h.tanggal' at line 1 : Addr: $008EDDEA

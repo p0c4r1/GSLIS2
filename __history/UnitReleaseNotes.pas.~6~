@@ -1,0 +1,42 @@
+unit UnitReleaseNotes;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics,
+  Controls, Forms, uniGUITypes, uniGUIAbstractClasses,
+  uniGUIClasses, uniGUIForm, uniButton, uniMemo, uniGUIBaseClasses, uniPanel;
+
+type
+  TfrmReleaseNote = class(TUniForm)
+    UniContainerPanel1: TUniContainerPanel;
+    UniContainerPanel2: TUniContainerPanel;
+    UniMemo1: TUniMemo;
+    UniButton1: TUniButton;
+    procedure UniButton1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+function frmReleaseNote: TfrmReleaseNote;
+
+implementation
+
+{$R *.dfm}
+
+uses
+  MainModule, uniGUIApplication;
+
+function frmReleaseNote: TfrmReleaseNote;
+begin
+  Result := TfrmReleaseNote(UniMainModule.GetFormInstance(TfrmReleaseNote));
+end;
+
+procedure TfrmReleaseNote.UniButton1Click(Sender: TObject);
+begin
+Close;
+end;
+
+end.

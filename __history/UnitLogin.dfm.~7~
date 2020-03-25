@@ -1,0 +1,85 @@
+object UniLoginForm1: TUniLoginForm1
+  Left = 0
+  Top = 0
+  ClientHeight = 212
+  ClientWidth = 417
+  Caption = 'Login'
+  OldCreateOrder = False
+  BorderIcons = [biSystemMenu]
+  MonitoredKeys.Keys = <>
+  Font.Height = -16
+  OnAfterShow = UniLoginFormAfterShow
+  PixelsPerInch = 96
+  TextHeight = 19
+  object UniButton1: TUniButton
+    Left = 8
+    Top = 175
+    Width = 113
+    Height = 29
+    Hint = ''
+    Caption = '&Batal'
+    TabOrder = 0
+    OnClick = UniButton1Click
+  end
+  object UniButton2: TUniButton
+    Left = 304
+    Top = 175
+    Width = 107
+    Height = 29
+    Hint = ''
+    Caption = 'Login'
+    TabOrder = 1
+    Default = True
+    OnClick = UniButton2Click
+  end
+  object UniPanel1: TUniPanel
+    Left = 0
+    Top = 0
+    Width = 417
+    Height = 169
+    Hint = ''
+    Align = alTop
+    TabOrder = 2
+    Caption = ''
+  end
+  object UniLabel1: TUniLabel
+    Left = 56
+    Top = 40
+    Width = 32
+    Height = 19
+    Hint = ''
+    Caption = 'User'
+    TabOrder = 3
+  end
+  object UniLabel2: TUniLabel
+    Left = 56
+    Top = 80
+    Width = 67
+    Height = 19
+    Hint = ''
+    Caption = 'Password'
+    TabOrder = 4
+  end
+  object edUser: TUniEdit
+    Left = 144
+    Top = 40
+    Width = 201
+    Hint = ''
+    Text = ''
+    TabOrder = 5
+  end
+  object edPass: TUniEdit
+    Left = 144
+    Top = 80
+    Width = 201
+    Hint = ''
+    PasswordChar = '*'
+    Text = ''
+    TabOrder = 6
+  end
+  object qLogin: TFDQuery
+    Connection = UniMainModule.FDConnection1
+    Left = 168
+    Top = 168
+  end
+end

@@ -1,0 +1,59 @@
+{$define UNIGUI_VCL} // Comment out this line to turn this project into an ISAPI module
+
+{$ifndef UNIGUI_VCL}
+library
+{$else}
+program
+{$endif}
+  GSLIS2;
+
+uses
+  uniGUIISAPI,
+  Forms,
+  ServerModule in 'ServerModule.pas' {UniServerModule: TUniGUIServerModule},
+  MainModule in 'MainModule.pas' {UniMainModule: TUniGUIMainModule},
+  Main in 'Main.pas' {MainForm: TUniForm},
+  UnitLogin in 'UnitLogin.pas' {UniLoginForm1: TUniLoginForm},
+  UnitPendaftaran in 'UnitPendaftaran.pas' {frmPendaftaran: TUniForm},
+  UnitCariPasien in 'UnitCariPasien.pas' {frmCariPasien: TUniForm},
+  UnitPasienBaru in 'UnitPasienBaru.pas' {frmPasienBaru: TUniForm},
+  UnitCariDokter in 'UnitCariDokter.pas' {frmCariDokter: TUniForm},
+  UnitDokterBaru in 'UnitDokterBaru.pas' {frmDokterBaru: TUniForm},
+  UnitBayar in 'UnitBayar.pas' {frmBayar: TUniForm},
+  UnitReportDisplay in 'UnitReportDisplay.pas' {frmReportDisplay: TUniForm},
+  UnitStatusHasilPembayaran in 'UnitStatusHasilPembayaran.pas' {frmStatusHasilPembayaran: TUniForm},
+  UnitLaporanHarian in 'UnitLaporanHarian.pas' {frmLaporanHarian: TUniForm},
+  UnitGantiPassword in 'UnitGantiPassword.pas' {frmGantiPassword: TUniForm},
+  UnitKuitansi in 'UnitKuitansi.pas' {frmKuitansi: TUniForm},
+  UnitReleaseNotes in 'UnitReleaseNotes.pas' {frmReleaseNote: TUniForm},
+  UnitHomeService in 'UnitHomeService.pas' {frmHomeService: TUniForm},
+  UnitSyslog in 'UnitSyslog.pas' {frmSysLog: TUniForm},
+  UnitLogging in 'UnitLogging.pas',
+  UnitTanggalSelesai in 'UnitTanggalSelesai.pas' {frmTanggalSelesai: TUniForm},
+  UnitUser in 'UnitUser.pas' {frmUser: TUniForm},
+  UnitSampling in 'UnitSampling.pas' {frmSampling: TUniForm},
+  UnitLapPenjualan in 'UnitLapPenjualan.pas' {frmLapPenjualan: TUniForm},
+  UnitJasper in 'UnitJasper.pas',
+  UnitIsiHasilNoLab in 'UnitIsiHasilNoLab.pas' {frmIsiHasilNoLab: TUniForm},
+  UnitLapDokter in 'UnitLapDokter.pas' {frmLapDokter: TUniForm},
+  UnitQz in 'UnitQz.pas',
+  UnitTest in 'UnitTest.pas' {frmTest: TUniForm},
+  UnitFotoPasien in 'UnitFotoPasien.pas' {UniForm1: TUniForm};
+
+{$R *.res}
+
+{$ifndef UNIGUI_VCL}
+exports
+  GetExtensionVersion,
+  HttpExtensionProc,
+  TerminateExtension;
+{$endif}
+
+begin
+{$ifdef UNIGUI_VCL}
+  ReportMemoryLeaksOnShutdown := True;
+  Application.Initialize;
+  TUniServerModule.Create(Application);
+  Application.Run;
+{$endif}
+end.

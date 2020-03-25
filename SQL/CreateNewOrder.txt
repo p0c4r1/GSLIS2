@@ -1,0 +1,36 @@
+2019-03-16T14:21:55.150684Z	    7 Query	set autocommit=0
+2019-03-16T14:21:55.150684Z	    7 Query	lock tables penomoran write
+2019-03-16T14:21:55.151684Z	    7 Query	select pf1_nolab, pf2_nolab,nolab_length,nolab_max, reset_nolab,left(last_nolab,10) as last_nolab,left(now(),10) as xnow from penomoran
+2019-03-16T14:21:55.152684Z	    7 Query	select date_format(now(),'%y%m%d') as pf2
+2019-03-16T14:21:55.153684Z	    7 Query	update penomoran set nolab_max = 3+1,last_nolab=now()
+2019-03-16T14:21:55.153684Z	    7 Query	unlock tables
+2019-03-16T14:21:55.154684Z	    7 Query	insert into order_header(tanggal,pasien_id,dokter_id,tipe_pasien_id,tipe_hasil_id,nomor,sub_total,tagihan,disc_pct,disc_amount,total,flgLunas,cetak,urgency_id,ket_tgl_selesai)values(now(),144987,9615,1,1,'190316003',70000,0,0,0,70000,'Y',0,1,'' )
+2019-03-16T14:21:55.167685Z	    7 Query	select last_insert_id() as lid from order_header
+2019-03-16T14:21:55.463702Z	    7 Query	select p.*,k.nama as kelamin_nama,pf.nama as pf_nama from  pasien p, jenis_kelamin k, prefix pf where p.id =144987 and p.jenis_kelamin_id = k.id and p.prefix_id = pf.id
+2019-03-16T14:21:55.475703Z	    7 Query	select n.*,s.konversi from nilai_normal n  left join satuan_umur s on n.umur_satuan_id = s.id  where test_id=20 order by flg_kelamin_umur desc, flg_umur desc, flg_kelamin desc ,flg_text desc
+2019-03-16T14:21:55.476703Z	    7 Query	select * from nilai_normal where id =80
+2019-03-16T14:21:55.477703Z	    7 Query	insert into order_detail(id,header_id,test_id,test_kode,level,cetak_nota,cetak_hasil,ada_hasil,nama_test,harga,nilai_normal,hasil,hasil_si,flg_susul,tanggal_susul,urgency_id,status_id,nilai_normal_auto,nilai_normal_min,nilai_normal_max,rujukan)values(null,599628,20,'01020113',2,'Y','Y','Y','SGOT/AST',35000,'Perempuan','','','N','2019-03-16 21:19:02',1,1,'Y',0,32,'0 - 32')
+2019-03-16T14:21:55.477703Z	    7 Query	select p.*,k.nama as kelamin_nama,pf.nama as pf_nama from  pasien p, jenis_kelamin k, prefix pf where p.id =144987 and p.jenis_kelamin_id = k.id and p.prefix_id = pf.id
+2019-03-16T14:21:55.478703Z	    7 Query	select n.*,s.konversi from nilai_normal n  left join satuan_umur s on n.umur_satuan_id = s.id  where test_id=21 order by flg_kelamin_umur desc, flg_umur desc, flg_kelamin desc ,flg_text desc
+2019-03-16T14:21:55.479703Z	    7 Query	select * from nilai_normal where id =82
+2019-03-16T14:21:55.480703Z	    7 Query	insert into order_detail(id,header_id,test_id,test_kode,level,cetak_nota,cetak_hasil,ada_hasil,nama_test,harga,nilai_normal,hasil,hasil_si,flg_susul,tanggal_susul,urgency_id,status_id,nilai_normal_auto,nilai_normal_min,nilai_normal_max,rujukan)values(null,599628,21,'01020114',2,'Y','Y','Y','SGPT/ALT',35000,'Perempuan','','','N','2019-03-16 21:19:03',1,1,'Y',0,33,'0 - 33')
+2019-03-16T14:21:55.482703Z	    7 Query	lock tables penomoran write
+2019-03-16T14:21:55.483703Z	    7 Query	select pf1_NoNota,pf2_NoNota,NoNota_length,NoNota_max,reset_nonota,left(last_nonota,10) as last_nonota,left(now(),10) as xnow  from penomoran
+2019-03-16T14:21:55.484703Z	    7 Query	select date_format(now(),'%y%m%d') as pf2
+2019-03-16T14:21:55.484703Z	    7 Query	update penomoran set NoNota_max =3+1,last_nonota=now()
+2019-03-16T14:21:55.484703Z	    7 Query	unlock tables
+2019-03-16T14:21:55.484703Z	    7 Query	insert into pembayaran(tanggal,user_id,order_header_id,tipe_bayar_id,jumlah,charge,nomor,flg_first,tagihan) values(now(),89,599628,1,70000,0,'1903160003','Y',0)
+2019-03-16T14:21:55.490703Z	    7 Query	select last_insert_id() as lid  from pembayaran
+2019-03-16T14:21:56.022734Z	    7 Query	update order_header set pembayaran_id=792550,tagihan=0,flgLunas='Y' where id = 599628
+2019-03-16T14:21:56.022734Z	    7 Query	INSERT INTO interface_order (id) VALUES (NEW.id)
+2019-03-16T14:21:56.024734Z	    7 Query	update order_header set status_id=1 where id = 599628
+2019-03-16T14:21:56.024734Z	    7 Query	INSERT INTO interface_order (id) VALUES (NEW.id)
+2019-03-16T14:21:56.024734Z	    7 Query	update order_detail set status_id=1 where header_id=599628
+2019-03-16T14:21:56.024734Z	    7 Query	insert into order_status_time (order_header_id,tanggal,order_status_id,user_id,keterangan) values ( 599628,now(),1,89,'disc : 0%' )
+2019-03-16T14:21:56.025734Z	    7 Query	update pasien set tanggal_akhir_periksa=now(),jumlah_periksa=jumlah_periksa+1,jumlah_amount=jumlah_amount+70000 where id=144987
+2019-03-16T14:21:56.025734Z	    7 Query	update dokter set tanggal_pasien_terakhir=now(),total_pasien=total_pasien+1, total_amount=total_amount +70000 where id = 9615
+2019-03-16T14:21:56.025734Z	    7 Query	COMMIT
+2019-03-16T14:21:56.026734Z	    7 Query	SET AUTOCOMMIT=1
+2019-03-16T14:21:56.026734Z	    7 Query	set autocommit=1
+2019-03-16T14:21:56.026734Z	    7 Query	UPDATE order_header h, dokter d SET h.dokter_discount = d.discount WHERE h.dokter_id = d.id and h.id = 599628
+2019-03-16T14:21:56.026734Z	    7 Query	INSERT INTO interface_order (id) VALUES (NEW.id)

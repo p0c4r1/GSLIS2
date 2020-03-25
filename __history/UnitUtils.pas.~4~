@@ -1,0 +1,41 @@
+unit UnitUtils;
+
+interface
+
+uses
+Classes,Graphics,Data.DB,uniTreeView,uniGUIAbstractClasses;
+
+Procedure LoadBitmapFromBlob(Bitmap: TBitmap; Blob: TBlobField);
+
+implementation
+
+Procedure LoadBitmapFromBlob(Bitmap: TBitmap; Blob: TBlobField);
+var
+  ms, ms2: TMemoryStream;
+begin
+  ms := TMemoryStream.Create;
+  try
+    Blob.SaveToStream(ms);
+    ms.Position := 0;
+    Bitmap.LoadFromStream(ms);
+  finally
+    ms.Free;
+  end;
+end;
+
+function FindRootNode(ACaption: String; ATreeView: TUniTreeView): TUniTreeNode;
+var
+  LCount: Integer;
+begin
+  result := nil;
+  LCount := 0;
+  while (LCount < ATreeView.Items.Count) and (result = nil) do
+  begin
+    if (ATreeView.Items.Item[LCount].Text = ACaption) and
+      (ATreeView.Items.Item[LCount].Parent = nil) then
+      result := ATreeView.Items.Item[LCount];
+    inc(LCount);
+  end;
+end;
+
+end.

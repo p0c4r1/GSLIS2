@@ -1,0 +1,227 @@
+unit UnitQz;
+
+interface
+
+function printKuitansi(file_name: String): string;
+function printLabel(no_lab: string; nama: string; usia: string;
+  tgl_lahir: string; alamat: string; tgl: string; hp: string; dokter: string;
+  gender: string): string;
+function printBarcode(sid: string; pid: string; nama: string;
+  specimen: string): string;
+
+implementation
+
+uses SysUtils, Classes, NetEncoding, StrUtils, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  uniDBLookupComboBox, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  MainModule;
+
+function loadZpl(): string;
+var
+  QPar: TFDQuery;
+begin
+  QPar.Create();
+  QPar.Connection := UniMainModule.FDConnection1;
+  if QPar.Active then
+    QPar.Active := False;
+  QPar.SQL.Text := 'SELECT  value_text FROM parameters WHERE name = ' +
+    QuotedStr('ZPL_LABEL_ORDER');
+  QPar.Active := True;
+  result := QPar.FieldByName('value_text').AsString;
+end;
+
+function EncodeFile(const FileName: string): AnsiString;
+var
+  stream: TMemoryStream;
+begin
+  stream := TMemoryStream.Create;
+  try
+    stream.LoadFromFile(FileName);
+    result := TNetEncoding.Base64.EncodeBytesToString(stream.Memory,
+      stream.Size);
+  finally
+    stream.Free;
+  end;
+end;
+
+function printKuitansi(file_name: String): string;
+var
+  tmp: AnsiString;
+  js, Data: string;
+  inStream: TStream;
+  outStream: TStream;
+begin
+  tmp := StringReplace(EncodeFile(file_name), sLineBreak, '"+'#10 + '"',
+    [rfReplaceAll]);
+  js := 'function print() { ' +
+    ' var config = qz.configs.create("KUITANSIPRINTER", { size: {width: 148, height: 210 } , units: "mm" }); '
+    + ' var data = [{ type: "pdf",format:"base64", data: "' + tmp + '" }]; ' +
+    ' qz.print(config, data).catch(function(e) { console.error(e);}); ' + ' } '
+    + '  if (qz.websocket.isActive()) {  print(); }  else { qz.websocket.connect().then(function() { print();});}  ';
+
+  result := js;
+end;
+
+function printKuitansi_old(file_name: String): string;
+var
+  js: string;
+begin
+
+  js := 'function print() { ' +
+    ' var config = qz.configs.create("KUITANSIPRINTER", { size: {width: 148, height: 210 } , units: "mm" }); '
+    + ' var data = [{ type: "pdf", data: "' + file_name + '" }]; ' +
+    ' qz.print(config, data).catch(function(e) { console.error(e);}); ' + ' } '
+    + '  if (qz.websocket.isActive()) {  print(); }  else { qz.websocket.connect().then(function() { print();});}  ';
+
+  result := js;
+end;
+
+function printLabel(no_lab: string; nama: string; usia: string;
+  tgl_lahir: string; alamat: string; tgl: string; hp: string; dokter: string;
+  gender: string): string;
+var
+  js: string;
+  zpl2: string;
+begin
+  // clean linebreak
+  no_lab := StringReplace(no_lab, sLineBreak, ' ', [rfReplaceAll]);
+  nama := LeftStr(nama, 25);
+  nama := StringReplace(nama, sLineBreak, ' ', [rfReplaceAll]);
+  usia := StringReplace(usia, sLineBreak, ' ', [rfReplaceAll]);
+  tgl_lahir := StringReplace(tgl_lahir, sLineBreak, ' ', [rfReplaceAll]);
+  alamat := StringReplace(alamat, sLineBreak, ' ', [rfReplaceAll]);
+  tgl := StringReplace(tgl, sLineBreak, ' ', [rfReplaceAll]);
+  hp := StringReplace(hp, sLineBreak, ' ', [rfReplaceAll]);
+  dokter := StringReplace(dokter, sLineBreak, ' ', [rfReplaceAll]);
+  gender := StringReplace(gender, sLineBreak, ' ', [rfReplaceAll]);
+
+  // clean quote
+  no_lab := StringReplace(no_lab, '"', ' ', [rfReplaceAll]);
+  nama := StringReplace(nama, '"', ' ', [rfReplaceAll]);
+  usia := StringReplace(usia, '"', ' ', [rfReplaceAll]);
+  tgl_lahir := StringReplace(tgl_lahir, '"', ' ', [rfReplaceAll]);
+  alamat := StringReplace(alamat, '"', ' ', [rfReplaceAll]);
+  tgl := StringReplace(tgl, '"', ' ', [rfReplaceAll]);
+  hp := StringReplace(hp, '"', ' ', [rfReplaceAll]);
+  dokter := StringReplace(dokter, '"', ' ', [rfReplaceAll]);
+  gender := StringReplace(gender, '"', ' ', [rfReplaceAll]);
+
+  //
+  zpl2 := loadZpl();
+
+  zpl2 := StringReplace(zpl2, '<no_lab>', no_lab, [rfReplaceAll]);
+  zpl2 := StringReplace(zpl2, '<hp>', hp, [rfReplaceAll]);
+  zpl2 := StringReplace(zpl2, '<dokter>', dokter, [rfReplaceAll]);
+  zpl2 := StringReplace(zpl2, '<tgl>', tgl, [rfReplaceAll]);
+  zpl2 := StringReplace(zpl2, '<alamat>', alamat, [rfReplaceAll]);
+  zpl2 := StringReplace(zpl2, '<tgl_lahir>', tgl_lahir, [rfReplaceAll]);
+  zpl2 := StringReplace(zpl2, '<usia>', usia, [rfReplaceAll]);
+  zpl2 := StringReplace(zpl2, '<nama>', nama, [rfReplaceAll]);
+  zpl2 := StringReplace(zpl2, '<gender>', gender, [rfReplaceAll]);
+
+  js := 'function print() { ' +
+    ' var config = qz.configs.create("LABELPRINTER"); ' + ' var data = [' + zpl2
+    + ']; ' + ' qz.print(config, data).catch(function(e) { console.error(e);}); '
+    + ' } ' + '  if (qz.websocket.isActive()) {  print(); }  else { qz.websocket.connect().then(function() { print();});}  ';
+
+  result := js;
+end;
+
+function printLabel_old(no_lab: string; nama: string; usia: string;
+  tgl_lahir: string; alamat: string; tgl: string; hp: string; dokter: string;
+  gender: string): string;
+var
+  js: string;
+  zpl2: string;
+begin
+  // clean linebreak
+  no_lab := StringReplace(no_lab, sLineBreak, ' ', [rfReplaceAll]);
+  nama := LeftStr(nama, 25);
+  nama := StringReplace(nama, sLineBreak, ' ', [rfReplaceAll]);
+  usia := StringReplace(usia, sLineBreak, ' ', [rfReplaceAll]);
+  tgl_lahir := StringReplace(tgl_lahir, sLineBreak, ' ', [rfReplaceAll]);
+  alamat := StringReplace(alamat, sLineBreak, ' ', [rfReplaceAll]);
+  tgl := StringReplace(tgl, sLineBreak, ' ', [rfReplaceAll]);
+  hp := StringReplace(hp, sLineBreak, ' ', [rfReplaceAll]);
+  dokter := StringReplace(dokter, sLineBreak, ' ', [rfReplaceAll]);
+  gender := StringReplace(gender, sLineBreak, ' ', [rfReplaceAll]);
+
+  // clean quote
+  no_lab := StringReplace(no_lab, '"', ' ', [rfReplaceAll]);
+  nama := StringReplace(nama, '"', ' ', [rfReplaceAll]);
+  usia := StringReplace(usia, '"', ' ', [rfReplaceAll]);
+  tgl_lahir := StringReplace(tgl_lahir, '"', ' ', [rfReplaceAll]);
+  alamat := StringReplace(alamat, '"', ' ', [rfReplaceAll]);
+  tgl := StringReplace(tgl, '"', ' ', [rfReplaceAll]);
+  hp := StringReplace(hp, '"', ' ', [rfReplaceAll]);
+  dokter := StringReplace(dokter, '"', ' ', [rfReplaceAll]);
+  gender := StringReplace(gender, '"', ' ', [rfReplaceAll]);
+
+  zpl2 := '"^XA~TA000~JSN^LT0^MNW^MTT^PON^PMN^LH0,0^JMA^PR5,5~SD15^JUS^LRN^CI0^XZ\n",';
+  zpl2 := zpl2 + '"^XA\n",';
+  zpl2 := zpl2 + '"^MMT\n",';
+  zpl2 := zpl2 + '"^PW480\n",';
+  zpl2 := zpl2 + '"^LL0320\n",';
+  zpl2 := zpl2 + '"^LS0\n",';
+  zpl2 := zpl2 + '"^FT9,40^A0N,28,28^FH\^FDLAB NO. ' + no_lab + '^FS\n",';
+  zpl2 := zpl2 + '"^FT336,269^A0N,28,28^FH\^FD' + hp + '^FS\n",';
+  zpl2 := zpl2 + '"^FT10,306^A0N,28,28^FH\^FD' + dokter + '^FS\n",';
+  zpl2 := zpl2 + '"^FT11,270^A0N,28,28^FH\^FD' + tgl + '^FS\n",';
+  zpl2 := zpl2 + '"^FT10,155^A0N,28,28^FH\^FD' + alamat + '^FS\n",';
+  zpl2 := zpl2 + '"^FT231,119^A0N,28,28^FH\^FD' + gender + '^FS\n",';
+  zpl2 := zpl2 + '"^FT9,119^A0N,28,28^FH\^FD' + tgl_lahir + '^FS\n",';
+  zpl2 := zpl2 + '"^FT377,82^A0N,28,28^FH\^FD' + usia + '^FS\n",';
+  zpl2 := zpl2 + '"^BY3,3,67^FT20,229^BCN,,N,N\n",';
+  zpl2 := zpl2 + '"^FD>;' + no_lab + '^FS\n",';
+  zpl2 := zpl2 + '"^FT9,83^A0N,28,28^FH\^FD' + nama + '^FS\n",';
+  zpl2 := zpl2 + '"^LRY^FO1,1^GB478,0,52^FS^LRN\n",';
+  zpl2 := zpl2 + '"^PQ1,0,1,Y^XZ\n",';
+
+  js := 'function print() { ' +
+    ' var config = qz.configs.create("LABELPRINTER"); ' + ' var data = [' + zpl2
+    + ']; ' + ' qz.print(config, data).catch(function(e) { console.error(e);}); '
+    + ' } ' + '  if (qz.websocket.isActive()) {  print(); }  else { qz.websocket.connect().then(function() { print();});}  ';
+
+  result := js;
+end;
+
+function printBarcode(sid: string; pid: string; nama: string;
+  specimen: string): string;
+var
+  js: string;
+  zpl2: string;
+begin
+  // clean linebreak
+  sid := StringReplace(sid, sLineBreak, ' ', [rfReplaceAll]);
+  pid := StringReplace(pid, sLineBreak, ' ', [rfReplaceAll]);
+  nama := LeftStr(nama, 25);
+  nama := StringReplace(nama, sLineBreak, ' ', [rfReplaceAll]);
+
+  // clean quoted "
+  sid := StringReplace(sid, '"', ' ', [rfReplaceAll]);
+  pid := StringReplace(pid, '"', ' ', [rfReplaceAll]);
+  nama := StringReplace(nama, '"', ' ', [rfReplaceAll]);
+
+  zpl2 := '"^XA~TA000~JSN^LT0^MNW^MTT^PON^PMN^LH0,0^JMA^PR5,5~SD15^JUS^LRN^CI0^XZ\n",';
+  zpl2 := zpl2 + '"^XA\n",';
+  zpl2 := zpl2 + '"^MMT\n",';
+  zpl2 := zpl2 + '"^PW400\n",';
+  zpl2 := zpl2 + '"^LL0240\n",';
+  zpl2 := zpl2 + '"^LS0\n",';
+  zpl2 := zpl2 + '"^FT385,162^A0I,28,28^FH\^FDPID : ' + pid + '^FS\n",';
+  zpl2 := zpl2 + '"^FT385,201^A0I,28,28^FH\^FD' + nama + '^FS\n",';
+  zpl2 := zpl2 + '"^BY2,3,125^FT385,27^BCI,,Y,N\n",';
+  zpl2 := zpl2 + '"^FD>:' + sid + '^FS\n",';
+  zpl2 := zpl2 + '"^FT9,39^A0R,28,28^FH\^FD' + specimen + '^FS\n",';
+  zpl2 := zpl2 + '"^PQ1,0,1,Y^XZ\n",';
+
+  js := 'function print() { ' +
+    ' var config = qz.configs.create("LABELPRINTER"); ' + ' var data = [' + zpl2
+    + ']; ' + ' qz.print(config, data).catch(function(e) { console.error(e);}); '
+    + ' } ' + '  if (qz.websocket.isActive()) {  print(); }  else { qz.websocket.connect().then(function() { print();});}  ';
+
+  result := js;
+end;
+
+end.

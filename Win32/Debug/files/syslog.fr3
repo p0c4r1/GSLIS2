@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<TfrxReport Version="5.2.3" DotMatrixReport="False" EngineOptions.DoublePass="True" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="4095" PreviewOptions.Zoom="1" PrintOptions.Printer="Default" PrintOptions.PrintOnSheet="0" ReportOptions.CreateDate="43541.1050954861" ReportOptions.Description.Text="" ReportOptions.LastChange="43607.9541393866" ScriptLanguage="PascalScript" ScriptText.Text="procedure ReportSummary1OnBeforePrint(Sender: TfrxComponent);&#13;&#10;begin&#13;&#10;  //Engine.CurY := Engine.CurY + Engine.FreeSpace - ReportSummary1.Height - 1;                                                                                                                                                                     &#13;&#10;end;&#13;&#10;&#13;&#10;begin&#13;&#10;&#13;&#10;end.">
+  <Datasets>
+    <item DataSet="frxDBDataset2" DataSetName="frxDBDataset2"/>
+  </Datasets>
+  <Variables>
+    <item Name=" New Category1"/>
+    <item Name="terbilang"/>
+  </Variables>
+  <TfrxDataPage Name="Data" Height="1000" Left="0" Top="0" Width="1000"/>
+  <TfrxReportPage Name="Page1" PaperWidth="148" PaperHeight="210" PaperSize="11" LeftMargin="0" RightMargin="0" TopMargin="0" BottomMargin="0" ColumnWidth="0" ColumnPositions.Text="" HGuides.Text="" VGuides.Text="">
+    <TfrxReportTitle Name="ReportTitle1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Height="41.57483" Left="0" Top="18.89765" Width="559.37044">
+      <TfrxMemoView Name="Memo1" Left="0" Top="0" Width="555.59091" Height="26.45671" Font.Charset="1" Font.Color="0" Font.Height="-19" Font.Name="Arial" Font.Style="0" HAlign="haCenter" ParentFont="False" Text="SysLog Report"/>
+    </TfrxReportTitle>
+    <TfrxHeader Name="Header1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Height="22.67718" Left="0" Top="120.94496" Width="559.37044" Stretched="True">
+      <TfrxMemoView Name="Memo2" Left="7.55906" Top="0" Width="26.45671" Height="18.8976378" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Arial" Font.Style="1" Frame.Typ="15" Fill.BackColor="-16777216" HAlign="haCenter" ParentFont="False" VAlign="vaCenter" Text="NO"/>
+      <TfrxMemoView Name="Memo3" Left="34.01577" Top="0" Width="68.03154" Height="18.8976378" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Arial" Font.Style="1" Frame.Typ="15" Fill.BackColor="-16777216" HAlign="haCenter" ParentFont="False" VAlign="vaCenter" Text="USER"/>
+      <TfrxMemoView Name="Memo4" Left="102.04731" Top="0" Width="68.03154" Height="18.8976378" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Arial" Font.Style="1" Frame.Typ="15" Fill.BackColor="-16777216" HAlign="haCenter" ParentFont="False" VAlign="vaCenter" Text="NOLAB"/>
+      <TfrxMemoView Name="Memo5" Left="170.07885" Top="0" Width="102.04731" Height="18.8976378" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Arial" Font.Style="1" Frame.Typ="15" Fill.BackColor="-16777216" HAlign="haCenter" ParentFont="False" VAlign="vaCenter" Text="TANGGAL"/>
+      <TfrxMemoView Name="Memo6" Left="272.12616" Top="0" Width="279.68522" Height="18.8976378" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Arial" Font.Style="1" Frame.Typ="15" Fill.BackColor="-16777216" HAlign="haCenter" ParentFont="False" VAlign="vaCenter" Text="KETERANGAN"/>
+    </TfrxHeader>
+    <TfrxMasterData Name="MasterData1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Height="22.67718" Left="0" Top="166.29932" Width="559.37044" ColumnWidth="0" ColumnGap="0" DataSet="frxDBDataset2" DataSetName="frxDBDataset2" RowCount="0" Stretched="True">
+      <TfrxSysMemoView Name="SysMemo1" Left="7.55906" Top="0" Width="26.45671" Height="18.8976377952756" StretchMode="smMaxHeight" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Arial" Font.Style="0" Frame.Typ="15" HAlign="haCenter" ParentFont="False" VAlign="vaCenter" Text="[LINE#]"/>
+      <TfrxMemoView Name="frxDBDataset2user_name" Left="34.01577" Top="0" Width="68.03154" Height="18.8976377952756" StretchMode="smMaxHeight" DataField="user_name" DataSet="frxDBDataset2" DataSetName="frxDBDataset2" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Arial" Font.Style="0" Frame.Typ="15" HAlign="haCenter" ParentFont="False" VAlign="vaCenter" Text="[frxDBDataset2.&#34;user_name&#34;]"/>
+      <TfrxMemoView Name="Memo7" Left="102.04731" Top="0" Width="68.03154" Height="18.8976378" StretchMode="smMaxHeight" DataField="nomor" DataSet="frxDBDataset2" DataSetName="frxDBDataset2" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Arial" Font.Style="0" Frame.Typ="15" HAlign="haCenter" ParentFont="False" VAlign="vaCenter" Text="[frxDBDataset2.&#34;nomor&#34;]"/>
+      <TfrxMemoView Name="Memo8" Left="170.07885" Top="0" Width="102.04731" Height="18.8976378" StretchMode="smMaxHeight" DataField="tanggal" DataSet="frxDBDataset2" DataSetName="frxDBDataset2" DisplayFormat.FormatStr="dd-mm-yyyy hh:mm:ss" DisplayFormat.Kind="fkDateTime" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Arial" Font.Style="0" Frame.Typ="15" HAlign="haCenter" ParentFont="False" VAlign="vaCenter" Text="[frxDBDataset2.&#34;tanggal&#34;]"/>
+      <TfrxMemoView Name="Memo9" Left="272.12616" Top="0" Width="279.68522" Height="18.8976378" StretchMode="smMaxHeight" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Arial" Font.Style="0" Frame.Typ="15" ParentFont="False" VAlign="vaCenter" Text="&#60;[&#60;frxDBDataset2.&#34;status_nama&#34;&#62;]&#62;  [&#60;frxDBDataset2.&#34;keterangan&#34;&#62;]">
+        <Formats>
+          <item/>
+          <item/>
+        </Formats>
+      </TfrxMemoView>
+    </TfrxMasterData>
+    <TfrxPageFooter Name="PageFooter1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Height="22.67718" Left="0" Top="249.44898" Width="559.37044">
+      <TfrxSysMemoView Name="SysMemo2" Left="291.02381" Top="0" Width="260.78757" Height="18.89765" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Arial" Font.Style="2" HAlign="haRight" ParentFont="False" VAlign="vaCenter" Text="[PAGE#] of [TOTALPAGES#]"/>
+    </TfrxPageFooter>
+  </TfrxReportPage>
+</TfrxReport>

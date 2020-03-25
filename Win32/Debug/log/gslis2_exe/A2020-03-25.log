@@ -1,0 +1,90 @@
+GSLIS2.exe: 00002074: 10:18:44 []:>--------------------------------------------------------------<
+GSLIS2.exe: 00002074: 10:18:44 [TUniServerModule]:Server First Init.
+GSLIS2.exe: 00002074: 10:18:44 [TUniServerModule]:Debug Mode = ON
+GSLIS2.exe: 00002074: 10:18:44 [TUniServerModule]:Global Cache Folder Erased. <8> Files deleted.
+GSLIS2.exe: 00002074: 10:18:44 [TUniServerModule]:Starting HTTP Server on Port: 80...
+GSLIS2.exe: 00002074: 10:18:48 [TUniServerModule]:HTTP Server Started on Port: 80
+GSLIS2.exe: 00000DF0: 10:22:15 []:>--------------------------------------------------------------<
+GSLIS2.exe: 00000DF0: 10:22:15 [TUniServerModule]:Server First Init.
+GSLIS2.exe: 00000DF0: 10:22:15 [TUniServerModule]:Debug Mode = ON
+GSLIS2.exe: 00000DF0: 10:22:15 [TUniServerModule]:Global Cache Folder Erased. <6> Files deleted.
+GSLIS2.exe: 00000DF0: 10:22:15 [TUniServerModule]:Starting HTTP Server on Port: 80...
+GSLIS2.exe: 00000DF0: 10:22:18 [TUniServerModule]:HTTP Server Started on Port: 80
+GSLIS2.exe: 000025F0: 10:22:23 [127.0.0.1]:EUniSessionException : Invalid session or session Timeout. : Addr: $008E7C6D
+GSLIS2.exe: 00001FD8: 10:24:36 []:>--------------------------------------------------------------<
+GSLIS2.exe: 00001FD8: 10:24:36 [TUniServerModule]:Server First Init.
+GSLIS2.exe: 00001FD8: 10:24:36 [TUniServerModule]:Debug Mode = ON
+GSLIS2.exe: 00001FD8: 10:24:36 [TUniServerModule]:Global Cache Folder Erased. <6> Files deleted.
+GSLIS2.exe: 00001FD8: 10:24:36 [TUniServerModule]:Starting HTTP Server on Port: 80...
+GSLIS2.exe: 00001FD8: 10:24:39 [TUniServerModule]:HTTP Server Started on Port: 80
+GSLIS2.exe: 0000279C: 10:24:41 [127.0.0.1]:EUniSessionException : Invalid session or session Timeout. : Addr: $008E7C6D
+GSLIS2.exe: 000012A4: 10:45:08 []:>--------------------------------------------------------------<
+GSLIS2.exe: 000012A4: 10:45:08 [TUniServerModule]:Server First Init.
+GSLIS2.exe: 000012A4: 10:45:08 [TUniServerModule]:Debug Mode = ON
+GSLIS2.exe: 000012A4: 10:45:08 [TUniServerModule]:Global Cache Folder Erased. <8> Files deleted.
+GSLIS2.exe: 000012A4: 10:45:08 [TUniServerModule]:Starting HTTP Server on Port: 80...
+GSLIS2.exe: 000012A4: 10:45:12 [TUniServerModule]:HTTP Server Started on Port: 80
+GSLIS2.exe: 00001020: 10:45:14 [127.0.0.1]:EUniSessionException : Invalid session or session Timeout. : Addr: $008E7C6D
+GSLIS2.exe: 00000CA4: 10:56:52 []:>--------------------------------------------------------------<
+GSLIS2.exe: 00000CA4: 10:56:52 [TUniServerModule]:Server First Init.
+GSLIS2.exe: 00000CA4: 10:56:52 [TUniServerModule]:Debug Mode = ON
+GSLIS2.exe: 00000CA4: 10:56:52 [TUniServerModule]:Global Cache Folder Erased. <6> Files deleted.
+GSLIS2.exe: 00000CA4: 10:56:53 [TUniServerModule]:Starting HTTP Server on Port: 80...
+GSLIS2.exe: 00000CA4: 10:56:56 [TUniServerModule]:HTTP Server Started on Port: 80
+GSLIS2.exe: 00001418: 10:57:04 [127.0.0.1]:EUniSessionException : Invalid session or session Timeout. : Addr: $008E7C6D
+GSLIS2.exe: 00002744: 16:23:05 []:>--------------------------------------------------------------<
+GSLIS2.exe: 00002744: 16:23:05 [TUniServerModule]:Server First Init.
+GSLIS2.exe: 00002744: 16:23:05 [TUniServerModule]:Debug Mode = ON
+GSLIS2.exe: 00002744: 16:23:05 [TUniServerModule]:Global Cache Folder Erased. <6> Files deleted.
+GSLIS2.exe: 00002744: 16:23:05 [TUniServerModule]:Starting HTTP Server on Port: 80...
+GSLIS2.exe: 00002744: 16:23:08 [TUniServerModule]:HTTP Server Started on Port: 80
+GSLIS2.exe: 00001970: 16:23:11 [127.0.0.1]:EUniSessionException : Invalid session or session Timeout. : Addr: $008E7C6D
+GSLIS2.exe: 00001E80: 16:23:11 [127.0.0.1]:EUniSessionException : Invalid session or session Timeout. : Addr: $008E7C6D
+GSLIS2.exe: 00002728: 16:26:29 []:>--------------------------------------------------------------<
+GSLIS2.exe: 00002728: 16:26:29 [TUniServerModule]:Server First Init.
+GSLIS2.exe: 00002728: 16:26:29 [TUniServerModule]:Debug Mode = ON
+GSLIS2.exe: 00002728: 16:26:29 [TUniServerModule]:Global Cache Folder Erased. <6> Files deleted.
+GSLIS2.exe: 00002728: 16:26:29 [TUniServerModule]:Starting HTTP Server on Port: 80...
+GSLIS2.exe: 00002728: 16:26:33 [TUniServerModule]:HTTP Server Started on Port: 80
+GSLIS2.exe: 00001C7C: 16:27:32 [127.0.0.1]:EUniSessionException : Invalid session or session Timeout. : Addr: $008E7C6D
+GSLIS2.exe: 000019E4: 16:30:18 []:>--------------------------------------------------------------<
+GSLIS2.exe: 000019E4: 16:30:18 [TUniServerModule]:Server First Init.
+GSLIS2.exe: 000019E4: 16:30:18 [TUniServerModule]:Debug Mode = ON
+GSLIS2.exe: 000019E4: 16:30:18 [TUniServerModule]:Global Cache Folder Erased. <6> Files deleted.
+GSLIS2.exe: 000019E4: 16:30:18 [TUniServerModule]:Starting HTTP Server on Port: 80...
+GSLIS2.exe: 000019E4: 16:30:20 [TUniServerModule]:HTTP Server Started on Port: 80
+GSLIS2.exe: 00001AB0: 16:30:21 [127.0.0.1]:EUniSessionException : Invalid session or session Timeout. : Addr: $008E7C6D
+GSLIS2.exe: 00002730: 16:30:54 [HandleFileRequest[127.0.0.1]]:Access denied: D:\Dev\GSLIS2\Win32\Debug\wpad.dat.
+GSLIS2.exe: 000025A4: 16:50:07 []:>--------------------------------------------------------------<
+GSLIS2.exe: 000025A4: 16:50:08 [TUniServerModule]:Server First Init.
+GSLIS2.exe: 000025A4: 16:50:08 [TUniServerModule]:Debug Mode = ON
+GSLIS2.exe: 000025A4: 16:50:08 [TUniServerModule]:Global Cache Folder Erased. <6> Files deleted.
+GSLIS2.exe: 000025A4: 16:50:08 [TUniServerModule]:Starting HTTP Server on Port: 80...
+GSLIS2.exe: 000025A4: 16:50:09 [TUniServerModule]:HTTP Server Started on Port: 80
+GSLIS2.exe: 0000179C: 16:50:12 [127.0.0.1]:EUniSessionException : Invalid session or session Timeout. : Addr: $008E7C6D
+GSLIS2.exe: 000026A4: 16:50:26 [QLayanan: Field 'layanana_id' not found-127.0.0.1]:EDatabaseError : QLayanan: Field 'layanana_id' not found : Addr: $00771882
+GSLIS2.exe: 00000BE8: 16:51:29 []:>--------------------------------------------------------------<
+GSLIS2.exe: 00000BE8: 16:51:29 [TUniServerModule]:Server First Init.
+GSLIS2.exe: 00000BE8: 16:51:29 [TUniServerModule]:Debug Mode = ON
+GSLIS2.exe: 00000BE8: 16:51:29 [TUniServerModule]:Global Cache Folder Erased. <5> Files deleted.
+GSLIS2.exe: 00000BE8: 16:51:29 [TUniServerModule]:Starting HTTP Server on Port: 80...
+GSLIS2.exe: 00000BE8: 16:51:31 [TUniServerModule]:HTTP Server Started on Port: 80
+GSLIS2.exe: 00000114: 16:51:31 [127.0.0.1]:EUniSessionException : Invalid session or session Timeout. : Addr: $008E7C6D
+GSLIS2.exe: 00002780: 16:51:32 [127.0.0.1]:EUniSessionException : Invalid session or session Timeout. : Addr: $008E7C6D
+GSLIS2.exe: 00002430: 16:51:32 [127.0.0.1]:EUniSessionException : Invalid session or session Timeout. : Addr: $008E7C6D
+GSLIS2.exe: 00001BFC: 16:51:32 [127.0.0.1]:EUniSessionException : Invalid session or session Timeout. : Addr: $008E7C6D
+GSLIS2.exe: 0000068C: 16:51:33 [127.0.0.1]:EUniSessionException : Invalid session or session Timeout. : Addr: $008E7C6D
+GSLIS2.exe: 00000958: 16:53:09 []:>--------------------------------------------------------------<
+GSLIS2.exe: 00000958: 16:53:09 [TUniServerModule]:Server First Init.
+GSLIS2.exe: 00000958: 16:53:10 [TUniServerModule]:Debug Mode = ON
+GSLIS2.exe: 00000958: 16:53:10 [TUniServerModule]:Global Cache Folder Erased. <6> Files deleted.
+GSLIS2.exe: 00000958: 16:53:10 [TUniServerModule]:Starting HTTP Server on Port: 80...
+GSLIS2.exe: 00000958: 16:53:13 [TUniServerModule]:HTTP Server Started on Port: 80
+GSLIS2.exe: 00000570: 16:53:21 [127.0.0.1]:EUniSessionException : Invalid session or session Timeout. : Addr: $008E7C6D
+GSLIS2.exe: 00001658: 16:53:53 [HandleFileRequest[127.0.0.1]]:Access denied: D:\Dev\GSLIS2\Win32\Debug\wpad.dat.
+GSLIS2.exe: 00001234: 16:54:42 []:>--------------------------------------------------------------<
+GSLIS2.exe: 00001234: 16:54:42 [TUniServerModule]:Server First Init.
+GSLIS2.exe: 00001234: 16:54:42 [TUniServerModule]:Debug Mode = ON
+GSLIS2.exe: 00001234: 16:54:42 [TUniServerModule]:Global Cache Folder Erased. <8> Files deleted.
+GSLIS2.exe: 00001234: 16:54:42 [TUniServerModule]:Starting HTTP Server on Port: 80...
+GSLIS2.exe: 00001234: 16:54:43 [TUniServerModule]:HTTP Server Started on Port: 80
